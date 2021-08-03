@@ -1,7 +1,7 @@
 #include <Context.h>
 #include <iostream>
 
-
+// better to use an abstract factory or singleton to get the instance
 Context::Context(const Strategy* s): st(s) {
     std::cout << "Context constructed\n";
 }
