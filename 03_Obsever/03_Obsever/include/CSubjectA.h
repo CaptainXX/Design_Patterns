@@ -10,7 +10,9 @@ public:
     CSubjectA();
 
     State GetState();
-    void SetStateAlgo();
+    void SetActivate();
+    void SetInit();
+    void SetDestroy();
 
 private:
     State sub_sta_;

@@ -1,21 +1,32 @@
 #include <iostream>
+#include <list>
 
 #include <CSubjectA.h>
 #include <ConcreteObserverA.h>
+#include <ConcreteObserverB.h>
 
 using namespace std;
 
 int main()
 {
     CSubjectA *bSbj = new CSubjectA;
-    Observer *obs = new ConcreteObserverA(bSbj);
+    std::list<Observer*> obs;
+    obs.push_back(new ConcreteObserverA(bSbj));
+    obs.push_back(new ConcreteObserverB(bSbj));
 
-    obs->Update();
-    bSbj->SetStateAlgo();
+    // show observer's init state
+    for (auto ob : obs) {
+        ob->Update();
+    }
+    bSbj->SetActivate();
+    bSbj->SetDestroy();
+    bSbj->SetInit();
 
     // observer must be deleted before subject do
     // because observer called subject.Detach() in its destructor
-    delete obs;
+    for (auto &ob : obs) {
+        delete ob;
+    }
     delete bSbj;
     return 0;
 }
